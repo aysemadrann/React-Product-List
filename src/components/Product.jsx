@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 function Product() {
 
 const [product, setProduct] = useState([]);
-
+const apiURL = 'https://fakestoreapi.com/products';
 useEffect(() => {
-    axios('https://fakestoreapi.com/products')
+    axios(apiURL)
     .then(res => {
         console.log(res)
         setProduct(res.data)

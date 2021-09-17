@@ -6,8 +6,9 @@ import {useParams} from 'react-router-dom'
 function ProductDetails() {
     let { id } = useParams();
     const [product, setProduct] = useState([]);
+    const apiURL = 'https://fakestoreapi.com/products';
     useEffect(() => {
-        axios(`https://fakestoreapi.com/products/${id}`)
+        axios(`${apiURL}/${id}`)
         .then(res => {
             console.log(res)
             setProduct(res.data)
