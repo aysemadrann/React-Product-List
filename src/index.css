@@ -20,10 +20,50 @@ code {
 .nav ul li {
   list-style-type: none;
 }
-.row{
-  width: 25%;
-  float: right;
+
+.card-title.h5{
+  text-align: center;
 }
-.row img{
+.image {
+  height: 250px;
+  padding: 20px;
+  background: #fff;
+  margin: auto;
+}
+.card{
+  width: 250px;
+  margin-bottom: 20px;
+}
+.card img{
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+.card__title{
   height: 100px;
+}
+.col-12 a {
+  color: #000;
+  text-decoration: none;
+}
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.details__width{
+  width: 250px;
+  margin-bottom: 20px;
+}
+.details__width img{
+  height: 100%;
+  max-width: 100%;
+  width: auto;
+}
+@media screen and (max-width:750px) {
+   .col-12{
+     align-items: center;
+     justify-content: center;
+   }
 }
