@@ -7,7 +7,7 @@ import {
 import ProductDetails from './components/ProductDetails';
 import Product from './components/Product';
 import Navbar from './components/navbar';
-
+import {PriceContext} from './contexts/PriceContext'
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
 //
@@ -21,22 +21,24 @@ import Navbar from './components/navbar';
 function App() {
       
   const [basketNumber, setBasketNumber] = useState(0);
-  const [price, setPrice] = useState(0);
+  const [basketPrice, setBasketPrice] = useState(0)
   return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/">
-            <Navbar number={basketNumber} price={price}  />
-            <Product  />
-          </Route>
-          <Route path="/list/:id" children={<ProductDetails />}>
-          <Navbar number={basketNumber} price={price} />
-          <ProductDetails number={basketNumber} numberEdit={setBasketNumber} priceEdit={setPrice} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <PriceContext.Provider value={{basketPrice, setBasketPrice, basketNumber, setBasketNumber}}>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/">
+              <Navbar number={basketNumber} price={basketPrice}  />
+              <Product number={basketNumber} numberEdit={setBasketNumber} priceEdit={setBasketPrice}  />
+            </Route>
+            <Route path="/list/:id" children={<ProductDetails />}>
+            <Navbar number={basketNumber} price={basketPrice} />
+            <ProductDetails number={basketNumber} numberEdit={setBasketNumber} priceEdit={setBasketPrice} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </PriceContext.Provider>
   );
 }
 

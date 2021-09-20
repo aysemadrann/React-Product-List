@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {useParams} from 'react-router-dom';
-
+import {PriceContext} from '../contexts/PriceContext'
 
 
 function ProductDetails(props) {
+    const {basketPrice, setBasketPrice} = useContext(PriceContext)
+    const {basketNumber, setBasketNumber} = useContext(PriceContext)
     let { id } = useParams();
     const [product, setProduct] = useState([]);
     const apiURL = 'https://fakestoreapi.com/products';
@@ -27,12 +29,12 @@ function ProductDetails(props) {
         }
     };
     const addBasket = () => {
-        props.numberEdit(value);
-        if(value > 0) {
-            props.priceEdit(value * price)
-        }
-
+            setBasketNumber(basketNumber + value)
+            var totalPrice = (price * value) + basketPrice
+            setBasketPrice(totalPrice)
+            
     };
+    console.log("Price: ",basketPrice)
     const { title, image, price, description } = product;
     return (
         <div>
@@ -47,7 +49,12 @@ function ProductDetails(props) {
                         <p>{description}</p>
                         <div className='d-flex justify-content-center'>
                             <button className='me-3' onClick={decrement}>-</button>
-                            <p className='me-3'>{value}</p>
+                            <p 
+                            className='me-3'
+                            onChange={(e) => setValue(e.target.value)}
+                            >
+                            {value}
+                            </p>
                             <button onClick={increment} >+</button>
                         </div>
                         <button onClick={addBasket} className='mt-4 btn btn-success'>Sepete ekle</button>
@@ -55,7 +62,9 @@ function ProductDetails(props) {
                 </div>
             </div>
         </div>
-    )
+
+    );
+
 }
 
 export default ProductDetails;
