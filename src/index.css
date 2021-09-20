@@ -40,7 +40,7 @@ code {
   width: auto;
 }
 .card__title{
-  height: 100px;
+  height: 150px;
 }
 .col-12 a {
   color: #000;
@@ -60,6 +60,13 @@ code {
   height: 100%;
   max-width: 100%;
   width: auto;
+}
+.card__hover:hover {
+  background-color: rgba(176, 176, 175, 0.1);
+}
+.shop__text {
+  color: #000;
+  text-decoration: none;
 }
 @media screen and (max-width:750px) {
    .col-12{

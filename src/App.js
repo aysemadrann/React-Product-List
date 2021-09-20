@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import ProductDetails from './components/ProductDetails';
 import Product from './components/Product';
+import Navbar from './components/navbar';
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -16,15 +17,23 @@ import Product from './components/Product';
 // making sure things like the back button and bookmarks
 // work properly.
 
-export default function BasicExample() {
+
+function App() {
+      
+  const [basketNumber, setBasketNumber] = useState(0);
+  const [price, setPrice] = useState(0);
   return (
     <Router>
       <div>
         <Switch>
           <Route exact path="/">
-            <Product />
+            <Navbar number={basketNumber} price={price}  />
+            <Product  />
           </Route>
-          <Route path="/list/:id" children={<ProductDetails />}/>
+          <Route path="/list/:id" children={<ProductDetails />}>
+          <Navbar number={basketNumber} price={price} />
+          <ProductDetails number={basketNumber} numberEdit={setBasketNumber} priceEdit={setPrice} />
+          </Route>
         </Switch>
       </div>
     </Router>
@@ -34,4 +43,4 @@ export default function BasicExample() {
 // You can think of these components as "pages"
 // in your app.
 
-
+export default App;

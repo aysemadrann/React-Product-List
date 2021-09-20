@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -13,17 +13,16 @@ const apiURL = 'https://fakestoreapi.com/products';
 useEffect(() => {
     axios(apiURL)
     .then(res => {
-        console.log(res)
         setProduct(res.data)
     })
 }, []);
 const list = product.map((post) => {
     const {id, title, image, price } = post;
     return (
-        <div className='col-12 col-sm-6 col-md-4 col-xl-3 d-flex'>
+        <div key={id} className='col-12 col-sm-6 col-md-4 col-xl-3 d-flex'>
             <div >
             <Link to={`/list/${id}`}>
-              <Card key={id}>
+              <Card  className='card__hover'  >
                 <div className='image'>
                 <Card.Img className='p-3 mx-auto' variant="top" src={image} />
                 </div>
@@ -32,7 +31,6 @@ const list = product.map((post) => {
                     <Card.Text>
                     {price}
                     </Card.Text>
-                    <Button className='text-center' variant="primary">Go somewhere</Button>
                 </Card.Body>
               </Card>
             </Link>
@@ -42,7 +40,6 @@ const list = product.map((post) => {
 });
 
 return <div className='container'>
-    <h1 className='text-center mb-4 mt-4'>Shop</h1>
     <div className='row d-flex justify-content-center'>
 {list}</div></div>
 }
